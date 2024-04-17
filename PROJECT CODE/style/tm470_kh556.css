@@ -1,0 +1,780 @@
+<style>
+/* style/tm470_kh556.css */
+
+/* accent green #a8d08d navy #000066 */
+/* background green #d5e8d4 aquamarine #66ffff*/
+
+/* clamp(minimum, preferred, maximum); */
+
+/* align-items: start | end | center | stretch; */
+/* align-self: start | end | center | stretch; */
+/* align-content: start | end | center | stretch | space-around | space-between | space-evenly;     */
+
+/* justify-items: start | end | center | stretch; */
+/* justify-self: start | end | center | stretch; */
+/* justify-content: start | end | center | stretch | space-around | space-between | space-evenly;     */
+
+*
+{
+	font-size: clamp(1.5rem, 10vw, 4rem) !important;  	
+}
+
+#errormessage
+{
+	color: red;
+}
+
+body, input
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif !important;
+	background-color: #d5e8d4; /*#000066; /*#00CCCC;*/
+	color: #000000;
+}
+
+#debug
+{
+	background-color: lightblue;
+	/* border: 1vw solid #FFFFFF; */
+	font-size: smaller;
+}
+
+h1, h2
+{
+	margin-bottom: 1vw;
+}
+
+/* ----------------------------------------------------------------------------
+ NAVIGATION GRID
+---------------------------------------------------------------------------- */
+nav
+{
+	display: grid;
+	grid-template-areas: 
+		'navhamburger navlogoutlink navlogoutlink'
+		'navhamburger navloginlink navloginlink'
+		'navlinks navlinks navlinks'
+		'navusermessage navusermessage navusermessage'
+		;
+	/* background-color: lightblue; */
+	/* background-color: #a8d08d; */
+	/* border: solid 1vw #d5e8d4;  */
+	color: #000;
+	padding-top: 2vw;
+	padding-left: 1vw;
+	padding-right: 1vw;
+}
+
+#navusermessage
+{
+	grid-area: navusermessage;
+	/* border: dashed 1vw red; */
+	/* background-color: #a8d08d; */
+	background-color: #FFF;
+	border: solid 0.5vw #000;
+	border-radius: 1vw;
+	padding: 2vw;
+	margin-bottom: 1vw;
+}
+
+#navhamburger
+{
+	grid-area: navhamburger;
+	/* border: dashed 1vw lightblue; */
+	background-color: #FFF;
+	border-radius: 1vw;
+	margin-bottom: 1vw;
+	justify-self: left;
+	cursor: pointer;
+}
+
+/* Only one of navlogoutlink/navloginlink will be displayed at any one time */
+#navlogoutlink
+{
+	grid-area: navlogoutlink;
+	/* border: dashed 1vw yellow; */
+	background-color: #a8d08d;
+	width: auto;
+	height: auto;
+	text-decoration: underline;
+	font-weight: bold;
+	justify-self: end;
+	align-self: center;
+	padding: 1vw;
+	cursor: pointer;
+}
+
+#navloginlink
+{
+	grid-area: navloginlink;
+	/* border: dashed 1vw yellow; */
+	background-color: #a8d08d;
+	width: auto;
+	height: auto;
+	text-decoration: underline;
+	font-weight: bold;
+	justify-self: end;
+	align-self: center;
+	padding: 1vw;
+	cursor: pointer;
+}
+
+#navlinks
+{
+	grid-area: navlinks;
+	/* border: dashed 1vw orange; */
+	background-color: #a8d08d;	
+	width: auto;
+	border-radius: 1vw;
+	justify-self: start;
+	align-items: start;
+	justify-content: start;
+	text-align: left;
+	
+	margin: 0vw;
+	padding: 0vw;
+}
+
+ul.menulinks 
+{
+	/* border: 0.5vw solid red; */
+	list-style-type: circle;
+	list-style-position: inside;
+	padding: 0vw;
+	border-radius: 2vw;
+	justify-content: space-evenly;
+}
+
+ul.menulinks li 
+{
+	padding: 2vw;
+	margin-bottom: 2vw;
+	/* border: solid 0.5vw #a8d08d; */
+	/* border: solid 1vw #d5e8d4;  */
+	border: solid 0.5vw #000;
+	background-color: #FFF;
+	border-radius: 2vw;
+}
+
+ul.menulinks li:last-child 
+{
+	margin-bottom: 0vw;
+	/* border-bottom: none */
+}
+
+main
+{
+	min-height: 70vw;
+}
+
+header
+{
+	border-radius: 1vw;
+	/* background-color: magenta; */
+	background-color: #a8d08d;
+	text-align: center;
+}
+
+footer
+{
+	border-radius: 1vw;
+	background-color: #a8d08d;
+	text-align: center;
+	margin-top: 3vw;
+	padding: 1vw;
+}
+
+/* ----------------------------------------------------------------------------
+ FR2/FR3
+---------------------------------------------------------------------------- */
+#loginformdisplay
+{
+	text-align: center;
+	margin-top: 2vw;
+}
+
+
+/* ----------------------------------------------------------------------------
+ FR8
+---------------------------------------------------------------------------- */
+#foodbankdisplay
+{
+	text-align: center;
+	margin-bottom: 5vw;
+	margin-top: 2vw;
+}
+
+/* ----------------------------------------------------------------------------
+ FR4/FR5/FR6
+---------------------------------------------------------------------------- */
+#prodcatdisplay, #prodcatdisplaythresholds
+{
+	text-align: center;
+	margin-bottom: 5vw;
+	margin-top: 2vw;
+}
+
+
+/* ----------------------------------------------------------------------------
+ Styling for input elements
+---------------------------------------------------------------------------- */
+input[type="text"]
+{
+	/* background-color: #a8d08d; */
+	background-color: #FFF;
+	padding: 1vw;
+	border-radius: 1vw;
+}
+
+input[type="password"]
+{
+	/* background-color: #a8d08d; */
+	background-color: #FFF;
+	padding: 1vw;
+	border-radius: 1vw;
+}
+
+input[type="button"]
+{
+	background-color: #a8d08d;
+	width: min(30vw, 50vw);
+	padding: 1vw;
+	border: solid 1vw #a8d08d;
+	border-radius: 1vw;
+	font-weight: bold;
+	font-size: 105%;
+}
+
+input[type="submit"]
+{
+	background-color: #a8d08d;
+	width: min(30vw, 50vw);
+	padding: 1vw;
+	border: solid 1vw #a8d08d;
+	border-radius: 1vw;
+	font-weight: bold;
+	font-size: 105%;
+}
+
+input[type="checkbox"]:checked:after 
+{
+	background-color: #000;
+	color: #FFF;
+}
+/* {
+	background-color: #000;
+}
+ */
+select  
+{ 
+	font-size: 105%; 
+	background-color: #a8d08d;
+	border-radius: 1vw;
+	padding: 1vw;
+}
+
+#usermessage
+{
+	border: solid 1vw #a8d08d;
+	background-color: #FFFFFF;
+	font-weight: bold;
+	border-radius: 1vw;
+	padding: 1vw;
+	margin-top: 5vw;
+	margin-bottom: 5vw;
+	text-align: center;
+}
+
+/* ----------------------------------------------------------------------------
+ Elements to contain DB or calculated values displayed inline
+---------------------------------------------------------------------------- */
+#prodcatname, #current_qty, #new_qty
+{
+	/* color: red; */
+}
+
+#fp_instructions
+{
+	/* color: blue; */
+	text-align: center;
+	padding-top: 3vw;
+	padding-bottom: 3vw;
+}
+
+#fp_hint
+{
+	color: red;
+	text-align: center;
+	text-decoration: italic;
+}
+
+#prodcatdisplay
+{
+}
+
+/* ----------------------------------------------------------------------------
+ Elements to contain DB or calculated values displayed as a block 
+---------------------------------------------------------------------------- */
+
+#foodbankdetails, #prioritylistdetails, #prodcatdetails
+{
+	/* color: red; */
+}
+
+/* --------------------------------------------------------------------------- 
+ Grid container and related elements for displaying food bank details and
+ priority list   
+ --------------------------------------------------------------------------- */
+#foodbankdetails 
+{
+	display: grid;
+	grid-template-areas: 
+		'fb_name fb_name'
+		'fb_email fb_email_content'
+		'fb_phone fb_phone_content'
+		'fb_website fb_website_content'
+		;
+	/* border: dotted 1vw red; */
+	/* grid-column-gap: 10px; - for a gap between the columns */
+} 
+
+#prioritylistdetails 
+{
+	display: grid;
+	grid-template-areas: 
+		'priority_list_label'
+		'updatedate'
+		'prioritylistinfo'
+		'cat_list'
+		'temp'
+		;
+	/* border: dotted 1vw pink; */
+	margin-top: 5vw;
+	place-items: center;
+	/* grid-column-gap: 10px; - for a gap between the columns */
+} 
+
+#cat_list
+{
+	grid-area: cat_list;
+	/* border: dotted 1vw #FFF; */
+	justify-content: stretch;
+	/* place-items: center; */
+	/* place-content: center; */
+}
+
+#priority_list_label
+{
+	grid-area: priority_list_label;
+	/* border: dotted 1vw magenta; */
+	align-self: center;
+	justify-self: stretch;
+	text-align: center;
+	/* place-self: center; */
+	text-decoration: underline;
+}
+
+#updatedate
+{
+	grid-area: updatedate;
+	/* border: dotted 1vw yellow; */
+	align-self: center;
+	justify-self: stretch;
+	text-align: center;
+	/* place-self: center; */
+	font-size: smaller;
+}
+
+#prioritylistinfo
+{
+	grid-area: prioritylistinfo;
+	/* border: dotted 1vw green; */
+	align-self: center;
+	justify-self: stretch;
+	text-align: center;
+	/* place-self: center; */
+	margin-top: 2vw;
+}
+
+#fb_name, #fb_email, #fb_phone, #fb_website, 
+#fb_email_content, #fb_phone_content, #fb_website_content,
+#cat_list
+{
+	padding: 2vw;
+}
+
+#fb_name
+{
+	grid-area: fb_name;
+	/* border: dotted 1vw blue; */
+	align-self: center;
+	justify-self: stretch;
+	text-align: center;
+	/* place-self: center; */
+	text-decoration: underline;
+}
+
+#fb_email
+{
+	grid-area: fb_email;
+	/* border: dotted 1vw blue; */
+	align-self: right;
+	justify-self: right;
+}
+
+#fb_phone
+{
+	grid-area: fb_phone;
+	/* border: dotted 1vw blue; */
+	align-self: right;
+	justify-self: right;
+}
+
+#fb_website
+{
+	grid-area: fb_website;
+	/* border: dotted 1vw blue; */
+	align-self: right;
+	justify-self: right;
+}					
+
+#fb_email_content
+{
+	grid-area: fb_email_content;
+	/* border: dotted 1vw blue; */
+	place-self: left;
+}
+
+#fb_phone_content
+{
+	grid-area: fb_phone_content;
+	/* border: dotted 1vw blue; */
+	place-self: left;
+}
+
+#fb_website_content
+{
+	grid-area: fb_website_content;
+	/* border: dotted 1vw blue; */
+	place-self: left;
+}		
+
+/* --------------------------------------------------------------------------- 
+ Table for display of product categories with checkboxes and amounts to be 
+ put into the different sized food parcels   
+ --------------------------------------------------------------------------- */
+#prodcattable
+{
+	background-color: #a8d08d;
+	border: solid 1vw #d5e8d4;
+	padding: 1vw;
+	place-self: center;
+	border-radius: 2vw;
+	border-spacing: 1vw;
+}
+
+#prodcatheading
+{
+	/* background-color: #FFF; */
+	padding: 1vw;
+	text-decoration: underline;
+	font-weight: bold;
+	text-align: left;
+	/* border-radius: 1vw; */
+	padding: 1vw;
+}
+
+#amountheading
+{
+	/* background-color: #FFF; */
+	padding: 1vw;
+	text-decoration: underline;
+	font-weight: bold;
+	/* border-radius: 1vw; */
+	padding: 1vw;
+}
+
+#numberinstock
+{
+	/* background-color: #FFF; */
+	padding: 1vw;
+	text-decoration: underline;
+	font-weight: bold;
+	/* border-radius: 1vw; */
+	padding: 1vw;
+}
+
+#leftcol
+{
+	/* border: solid 0.5vw red; */
+	text-align: center;
+	place-self: center;
+}
+
+.notenough
+{
+	color: red;
+}
+
+#midcol
+{
+	/* border: solid 0.5vw blue; */
+	text-align: center;
+	place-self: center;
+}
+
+#rightcol
+{
+	/* border: solid 0.5vw blue; */
+	text-align: center;
+	place-self: center;
+	width: clamp(2rem, 10vw, 2.5rem);
+	height: clamp(2rem, 10vw, 2.5rem); /* Needs to be identical values to width */
+}
+
+#heading_prodcatname, #heading_amount
+{
+	padding: 2vw;
+}
+
+input.parceltickbox
+{
+	width: clamp(2rem, 10vw, 2.5rem);
+	height: clamp(2rem, 10vw, 2.5rem); /* Needs to be identical values to width */
+}
+
+/* --------------------------------------------------------------------------- 
+ Grid container and related elements for displaying product category 
+ quantities for the selected food parcel size, with non-functional checkboxes
+ to increase usability of the real-world process   
+ --------------------------------------------------------------------------- */
+#foodparcelgrid 
+{
+	display: grid;
+	grid-template-areas: 
+		'prodcattable'
+		'submitfoodparcel'		
+		;
+	/* border: dotted 1vw red; */
+	/* grid-column-gap: 10px; - for a gap between the columns */
+} 
+
+/* Different buttons for FR11/FR12 */
+#buttondisplayFR12 
+{
+	display: grid;
+	grid-template-areas: 
+		'submitfoodparcel'
+		;	
+	/* border: dotted 1vw yellow; */
+	margin-top: 5vw;
+}
+
+/* Different buttons for FR11/FR12 */
+#submitfoodparcel
+{
+	grid-area: submitfoodparcel;
+	/* border: dotted 1vw cyan; */
+	place-self: center;	
+	width: auto;
+}
+
+/* --------------------------------------------------------------------------- 
+ Grid containers and associated elements for display of product 
+ category quantity and threshold pages for FR4/FR5 and FR4/FR6
+ --------------------------------------------------------------------------- */
+#quantitydisplay 
+{
+	display: grid;
+	grid-template-areas: 
+		'minusten minusone totaldisplay plusone plusten'
+		'. . totaldisplaylabel . .'
+		'newqtydisplay newqtydisplay newqtydisplay newqtydisplay newqtydisplay'
+		;
+	/* border: dotted 1vw red; */
+	/* grid-column-gap: 10px; - for a gap between the columns */
+} 
+
+#totaldisplaylabel
+{
+	vertical-align: bottom;
+}
+
+#totaldisplay
+{
+	background-color: #FFFFFF;
+	height: 15vw;
+	width: 15vw;
+	text-align: center;
+	font-weight: bold;
+	font-size: 105%; 
+	/* color: red; */
+}
+
+#quantitydisplay
+{
+	text-align: center;
+}
+
+#parceldisplay
+{
+	text-align: center;
+	margin-top: 2vw;
+}
+
+#minusten, #minusone, #plusone, #plusten, #minthreshold, #maxthreshold
+{
+	/* background-color: yellow; */
+	height: 15vw;
+	width: 15vw;
+}
+
+#buttondisplay 
+{
+	display: grid;
+	grid-template-areas: 
+		'cancel . applychanges'
+		;	
+	/* border: dotted 1vw yellow; */
+	margin-top: 5vw;
+	/* grid-column-gap: 10px; - for a gap between the columns */
+}
+
+#thresholddisplay 
+{
+	display: grid;
+	grid-template-areas: 
+		'minthresholdlabel maxthresholdlabel'
+		'minthreshold maxthreshold'
+		;
+	/* border: dotted 1vw red; */
+	/* grid-column-gap: 10px; - for a gap between the columns */
+}
+
+#minthresholdlabel
+{
+	grid-area: minthresholdlabel;
+	/* border: dotted 1vw green; */
+	place-self: center;
+}
+
+#maxthresholdlabel
+{
+	grid-area: maxthresholdlabel;
+	/* border: dotted 1vw green; */
+	place-self: center;
+}
+
+#minthreshold
+{
+	grid-area: minthreshold;
+	/* border: dotted 1vw green; */
+	place-self: center;
+	background-color: #FFFFFF;
+	height: 15vw;
+	width: 15vw;
+	text-align: center;
+	font-weight: bold;
+	font-size: 105%; 
+	/* color: red; */
+}
+
+#maxthreshold
+{
+	grid-area: maxthreshold;
+	/* border: dotted 1vw green; */
+	place-self: center;background-color: #FFFFFF;
+	height: 15vw;
+	width: 15vw;
+	text-align: center;
+	font-weight: bold;
+	font-size: 105%; 
+	/* color: red; */
+}
+
+#totaldisplaylabel 
+{
+	grid-area: totaldisplaylabel;
+	/* border: dotted 1vw green; */
+	place-self: center;
+}
+
+#minusten
+{
+	grid-area: minusten;
+	/* border: dotted 1vw blue; */
+	place-self: center;
+}
+
+#minusone
+{
+	grid-area: minusone;
+	/* border: dotted 1vw blue; */
+	place-self: center;
+}
+
+#totaldisplay
+{
+	grid-area: totaldisplay;
+	/* border: dotted 1vw blue; */
+	place-self: center;
+}
+
+#plusone
+{
+	grid-area: plusone;
+	/* border: dotted 1vw blue; */
+	place-self: center;
+}
+
+#plusten
+{
+	grid-area: plusten;
+	/* border: dotted 1vw blue; */
+	place-self: center;
+} 
+
+#cancel
+{
+	grid-area: cancel;
+	/* border: dotted 1vw magenta; */
+	place-self: center;
+}
+
+#applychanges
+{
+	grid-area: applychanges;
+	/* border: dotted 1vw orange; */
+	place-self: center;
+
+	width: auto;
+	min-width: min(30vw, 50vw);
+}
+
+#cancelthreshold
+{
+	grid-area: cancel;
+	/* border: dotted 1vw magenta; */
+	place-self: center;
+}
+
+#applythresholdchanges
+{
+	grid-area: applychanges;
+	/* border: dotted 1vw orange; */
+	place-self: center;
+
+	width: auto;
+	min-width: min(30vw, 50vw);
+}
+
+#newqtydisplay
+{
+	grid-area: newqtydisplay;
+	/* border: dotted 1vw cyan; */
+	text-align: left;
+	padding-top: 5vw;
+}
+
+/* ------------------------------------------------------------------------- */
+
+</style>

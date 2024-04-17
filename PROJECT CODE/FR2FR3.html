@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- FR2FR3.html -->
+
+<!-- Set the language for accessibility compliance -->
+<html lang="en">
+    <head>
+        <!-- Set the viewport width for responsive font/element sizing -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+		<!-- Include the stylesheet for display and layout -->
+		<link rel="stylesheet" type="text/css" href="style/tm470_kh556.css" />
+		
+		<!-- Include jQuery library : linking to Google version used by many increases loading speed -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/tm470_FR2FR3.js"></script>
+		<script type="text/javascript" src="scripts/buildmenulinks.js"></script>
+		<script type="text/javascript" src="scripts/init.js"></script>
+		<script type="text/javascript" src="scripts/navloginout.js"></script>
+		
+		<!-- Include database config file/s -->
+		<script language="php" src="scripts/config.php"></script>
+		
+		<title>TM470 Project : kh556</title>
+	</head>
+	<body>
+		<header>
+			<h1>TM470 Project</h1>
+			<h2>FR2/FR3</h2>
+			<nav>
+				<button id="navhamburger" type="button" aria-haspopup="true" aria-controls="menu" tabindex="1">
+				<img id="hamburgerlogo" role="none" src="images/hamburger_icon.png" aria-haspopup="true" aria-controls="menu" 
+				alt="An image representing a button. Activate this to display the available menu options" title="Click here to display available menu options" /></button>
+
+				<div id="navlinks"></div>
+			</nav>				
+		</header>
+		  
+		<main class="grid-container">
+			
+			<div class="middle">
+				
+				<div id="login_form"></div>
+				
+				<div id="foodbankdisplay"></div>
+				
+				<div id="foodbankdetails"></div>
+				
+				<div id="prioritylistdetails"></div>
+				
+			</div>
+			
+		</main>
+		
+		<footer>
+			Copyright Open University Student T5987212 : 2023 TM470 project
+		</footer>
+		
+    </body>
+</html>

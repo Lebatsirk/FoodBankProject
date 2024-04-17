@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Set the viewport width for responsive font/element sizing -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- Include jQuery library : linking to Google version used by many increases loading speed -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+		<title>TESTING ASSERTIONS</title>
+
+<script type="text/javascript">
+function unitTest(testName, testData, compareData)
+{
+	console.log("*** Called unitTest for " + testName);
+	console.assert((testData.trim() == (compareData.trim())), testName);
+}
+								
+$(document).ready(function()
+{
+	document.body.style.backgroundColor = "#d5e8d4";
+	
+	// Set up some constants to use as test data when comparing what is expected
+	const wrongFoodbankID = 1;
+	const rightFoodbankID = 2;
+	const wrongProdcatID = 1;
+	const rightProdcatID = 8;
+	const wrongParcelID = 1;
+	const rightParcelID = 2;
+	
+	// Specify how many tests are being run in total
+	const numOfTests = 12;
+	
+	for (var testNum = 1; testNum <= numOfTests; testNum++) 
+	{
+		<!-- console.log("testNum is " + testNum); // DEBUG -->
+		switch(testNum) 
+		{
+			case 1:
+				// TEST 1
+				$.get("scripts/buildfoodbanklist.php", function(data, status)
+				{
+					<!-- console.log(data); // DEBUG -->
+					unitTest(
+						"TEST1 (using .get, failure if no match to demo foodbanks)",
+						data,
+						"<label for='fbID'>Please select a Food Bank:</label><br /><br/><select id='fbID' tabindex='20' name='foodbanks'><option value=''>Please select...</option><option value='1'>Food Bank 1</option><option value='2'>Food Bank 2</option><option value='3'>Food Bank 3</option></select>"
+						);
+				});
+				break;
+			case 2:
+				// TEST 2
+				$.post("scripts/displayfoodbankinfo.php", 
+					{
+					},
+					// No foodbankID posted
+					function(data, status)
+					{
+					<!-- console.log(data); // DEBUG -->
+					unitTest(
+						"TEST2 (failure if no foodbank ID posted)",
+						data,
+						"Food Bank 2<br />foodbank2@test.tst<br />98765 432100<br />http://www.foodbank2.test<br />"
+						);
+				});
+				break;
+			case 3:
+				// TEST 3
+				$.post("scripts/displayfoodbankinfo.php",  	
+					{
+						fbID: wrongFoodbankID
+					},
+					function(data, status)
+					{
+					<!-- console.log(data); // DEBUG				 -->
+					unitTest(
+						"TEST3 (failure if NOT foodbank ID: 2 posted)",
+						data,
+						'<div id="fb_name">Food Bank 2</div><div id="fb_email">Email:</div><div id="fb_email_content">foodbank2@test.tst</div><div id="fb_phone">Phone:</div><div id="fb_phone_content">98765 432100</div><div id="fb_website">Website:</div><div id="fb_website_content">http://www.foodbank2.test</div>'
+						);
+				});
+				break;
+			case 4:
+				// TEST 4
+				$.post("scripts/displayfoodbankinfo.php", 	
+					{
+						fbID: rightFoodbankID
+					},
+					function(data, status)
+				{
+					<!-- console.log(data); // DEBUG					 -->
+					unitTest(
+						"TEST4 (failure if demo food bank 2 info not displayed)",
+						data,
+						'<div id="fb_name">Food Bank 2</div><div id="fb_email">Email:</div><div id="fb_email_content">foodbank2@test.tst</div><div id="fb_phone">Phone:</div><div id="fb_phone_content">98765 432100</div><div id="fb_website">Website:</div><div id="fb_website_content">http://www.foodbank2.test</div>'
+						);
+				});
+				break;
+			case 5:
+				// TEST 5
+				$.get("scripts/buildprodcatlist.php", function(data, status)
+				{
+					<!-- console.log(data); // DEBUG					 -->
+					unitTest(
+						"TEST5 (failure if no match to product categories)",
+						data,
+						"<label for='catID'>Please select a Product Category:</label><br /><br/><select id='catID' tabindex='20' name='prodcats'><option value=''>Please select...</option><option value='8'>Baked beans</option><option value='19'>Biscuits</option><option value='1'>Cereal</option><option value='21'>Chocolate</option><option value='18'>Hot dessert</option><option value='4'>Jam/Honey</option><option value='2'>Juice</option><option value='13'>Meatballs/hotdogs</option><option value='3'>Milk</option><option value='9'>Pasta 500g</option><option value='10'>Pasta sauce</option><option value='15'>Pie/steak/stew</option><option value='12'>Potatoes</option><option value='11'>Rice 500g</option><option value='6'>Soup</option><option value='5'>Tea/Coffee</option><option value='14'>Tinned chilli/tinned curry</option><option value='17'>Tinned fruit</option><option value='7'>Tinned meal</option><option value='16'>Tinned vegetables</option><option value='20'>Tuna</option></select>"
+						);
+				});
+				break;
+			case 6:
+				// TEST 6
+				$.post("scripts/displayprodcatinfo.php", 
+					{
+						fbID: rightFoodbankID
+					},
+					// No prodcatID posted
+					function(data, status)
+					{
+					<!-- console.log(data); // DEBUG -->
+					unitTest(
+						"TEST6 (failure if no prodcat ID posted)",
+						data,
+						'{"catName":"Baked beans","quantity":"16"}'
+						);
+				});
+				break;
+			case 7:
+				// TEST 7
+				$.post("scripts/displayprodcatinfo.php",  	
+					{
+						fbID: rightFoodbankID,
+						catID: wrongProdcatID
+					},
+					function(data, status)
+					{
+					<!-- console.log(data); // DEBUG				 -->
+					unitTest(
+						"TEST7 (failure if NOT prodcat ID: 8 posted)",
+						data,
+						'{"catName":"Baked beans","quantity":"16"}'
+						);
+				});
+				break;
+			case 8:
+				// TEST 8
+				$.post("scripts/displayprodcatinfo.php", 	
+					{
+						fbID: rightFoodbankID,
+						catID: rightProdcatID
+					},
+					function(data, status)
+				{
+					<!-- console.log(data); // DEBUG					 -->
+					unitTest(
+						"TEST8 (failure if product category 8 info for foodbank 2 not displayed)",
+						data,
+						'{"catName":"Baked beans","quantity":"16"}'
+						);
+				});
+				break;
+			case 9:
+				// TEST 9
+				$.get("scripts/buildfoodparcellist.php", function(data, status)
+				{
+					<!-- console.log(data); // DEBUG					 -->
+					unitTest(
+						"TEST9 (failure if food parcel list not displayed)",
+						data,
+						"<label for='parcelID'>Please select a Food Parcel size:</label><br /><br/><select id='parcelID' tabindex='20' name='foodparcels'><option value=''>Please select...</option><option value='1'>Small</option><option value='2'>Medium</option><option value='3'>Large</option></select>"
+						);
+				});
+				break;
+			case 10:
+				// TEST 10
+				$.post("scripts/displayparcelinfo.php", 
+					{
+						fbID: rightFoodbankID
+					},
+					// No parcelID posted
+					function(data, status)
+					{
+					<!-- console.log(data); // DEBUG -->
+					unitTest(
+						"TEST10 (failure if no parcel ID posted)",
+						data,
+						'[{"catID":"8","0":"8","catName":"Baked beans","1":"Baked beans","quantity":"16","2":"16","amount":"6","3":"6","notEnough":"0","4":"0"},{"catID":"19","0":"19","catName":"Biscuits","1":"Biscuits","quantity":"3","2":"3","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"1","0":"1","catName":"Cereal","1":"Cereal","quantity":"13","2":"13","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"21","0":"21","catName":"Chocolate","1":"Chocolate","quantity":"8","2":"8","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"18","0":"18","catName":"Hot dessert","1":"Hot dessert","quantity":"28","2":"28","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"4","0":"4","catName":"Jam/Honey","1":"Jam/Honey","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"2","0":"2","catName":"Juice","1":"Juice","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"13","0":"13","catName":"Meatballs/hotdogs","1":"Meatballs/hotdogs","quantity":"4","2":"4","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"3","0":"3","catName":"Milk","1":"Milk","quantity":"9","2":"9","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"9","0":"9","catName":"Pasta 500g","1":"Pasta 500g","quantity":"5","2":"5","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"10","0":"10","catName":"Pasta sauce","1":"Pasta sauce","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"15","0":"15","catName":"Pie/steak/stew","1":"Pie/steak/stew","quantity":"12","2":"12","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"12","0":"12","catName":"Potatoes","1":"Potatoes","quantity":"7","2":"7","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"11","0":"11","catName":"Rice 500g","1":"Rice 500g","quantity":"9","2":"9","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"6","0":"6","catName":"Soup","1":"Soup","quantity":"0","2":"0","amount":"4","3":"4","notEnough":"1","4":"1"},{"catID":"5","0":"5","catName":"Tea/Coffee","1":"Tea/Coffee","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"14","0":"14","catName":"Tinned chilli/tinned curry","1":"Tinned chilli/tinned curry","quantity":"3","2":"3","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"17","0":"17","catName":"Tinned fruit","1":"Tinned fruit","quantity":"19","2":"19","amount":"4","3":"4","notEnough":"0","4":"0"},{"catID":"7","0":"7","catName":"Tinned meal","1":"Tinned meal","quantity":"0","2":"0","amount":"2","3":"2","notEnough":"1","4":"1"},{"catID":"16","0":"16","catName":"Tinned vegetables","1":"Tinned vegetables","quantity":"10","2":"10","amount":"8","3":"8","notEnough":"0","4":"0"},{"catID":"20","0":"20","catName":"Tuna","1":"Tuna","quantity":"2","2":"2","amount":"4","3":"4","notEnough":"1","4":"1"}]'
+						);
+				});
+				break;
+			case 11:
+				// TEST 11
+				$.post("scripts/displayparcelinfo.php",  	
+					{
+						fbID: rightFoodbankID,
+						parcelID: wrongParcelID
+					},
+					function(data, status)
+					{
+					<!-- console.log(data); // DEBUG				 -->
+					unitTest(
+						"TEST11 (failure if amounts needed are NOT for parcel size 2 (medium) for food bank 2)",
+						data,
+						'[{"catID":"8","0":"8","catName":"Baked beans","1":"Baked beans","quantity":"16","2":"16","amount":"6","3":"6","notEnough":"0","4":"0"},{"catID":"19","0":"19","catName":"Biscuits","1":"Biscuits","quantity":"3","2":"3","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"1","0":"1","catName":"Cereal","1":"Cereal","quantity":"13","2":"13","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"21","0":"21","catName":"Chocolate","1":"Chocolate","quantity":"8","2":"8","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"18","0":"18","catName":"Hot dessert","1":"Hot dessert","quantity":"28","2":"28","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"4","0":"4","catName":"Jam/Honey","1":"Jam/Honey","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"2","0":"2","catName":"Juice","1":"Juice","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"13","0":"13","catName":"Meatballs/hotdogs","1":"Meatballs/hotdogs","quantity":"4","2":"4","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"3","0":"3","catName":"Milk","1":"Milk","quantity":"9","2":"9","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"9","0":"9","catName":"Pasta 500g","1":"Pasta 500g","quantity":"5","2":"5","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"10","0":"10","catName":"Pasta sauce","1":"Pasta sauce","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"15","0":"15","catName":"Pie/steak/stew","1":"Pie/steak/stew","quantity":"12","2":"12","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"12","0":"12","catName":"Potatoes","1":"Potatoes","quantity":"7","2":"7","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"11","0":"11","catName":"Rice 500g","1":"Rice 500g","quantity":"9","2":"9","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"6","0":"6","catName":"Soup","1":"Soup","quantity":"0","2":"0","amount":"4","3":"4","notEnough":"1","4":"1"},{"catID":"5","0":"5","catName":"Tea/Coffee","1":"Tea/Coffee","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"14","0":"14","catName":"Tinned chilli/tinned curry","1":"Tinned chilli/tinned curry","quantity":"3","2":"3","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"17","0":"17","catName":"Tinned fruit","1":"Tinned fruit","quantity":"19","2":"19","amount":"4","3":"4","notEnough":"0","4":"0"},{"catID":"7","0":"7","catName":"Tinned meal","1":"Tinned meal","quantity":"0","2":"0","amount":"2","3":"2","notEnough":"1","4":"1"},{"catID":"16","0":"16","catName":"Tinned vegetables","1":"Tinned vegetables","quantity":"10","2":"10","amount":"8","3":"8","notEnough":"0","4":"0"},{"catID":"20","0":"20","catName":"Tuna","1":"Tuna","quantity":"2","2":"2","amount":"4","3":"4","notEnough":"1","4":"1"}]'
+						);
+				});
+				break;
+			case 12:
+				// TEST 12
+				$.post("scripts/displayparcelinfo.php", 	
+					{
+						fbID: rightFoodbankID,
+						parcelID: rightParcelID
+					},
+					function(data, status)
+				{
+					<!-- console.log('%' + data.trim() + '%'); // DEBUG					 -->
+					unitTest(
+						"TEST12 (failure if current quantities for food parcel size 2 (medium) for food bank 2 not displayed)",
+						data.trim(),
+						'[{"catID":"8","0":"8","catName":"Baked beans","1":"Baked beans","quantity":"16","2":"16","amount":"6","3":"6","notEnough":"0","4":"0"},{"catID":"19","0":"19","catName":"Biscuits","1":"Biscuits","quantity":"3","2":"3","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"1","0":"1","catName":"Cereal","1":"Cereal","quantity":"13","2":"13","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"21","0":"21","catName":"Chocolate","1":"Chocolate","quantity":"8","2":"8","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"18","0":"18","catName":"Hot dessert","1":"Hot dessert","quantity":"28","2":"28","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"4","0":"4","catName":"Jam/Honey","1":"Jam/Honey","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"2","0":"2","catName":"Juice","1":"Juice","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"13","0":"13","catName":"Meatballs/hotdogs","1":"Meatballs/hotdogs","quantity":"4","2":"4","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"3","0":"3","catName":"Milk","1":"Milk","quantity":"9","2":"9","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"9","0":"9","catName":"Pasta 500g","1":"Pasta 500g","quantity":"5","2":"5","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"10","0":"10","catName":"Pasta sauce","1":"Pasta sauce","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"15","0":"15","catName":"Pie/steak/stew","1":"Pie/steak/stew","quantity":"12","2":"12","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"12","0":"12","catName":"Potatoes","1":"Potatoes","quantity":"7","2":"7","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"11","0":"11","catName":"Rice 500g","1":"Rice 500g","quantity":"9","2":"9","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"6","0":"6","catName":"Soup","1":"Soup","quantity":"0","2":"0","amount":"4","3":"4","notEnough":"1","4":"1"},{"catID":"5","0":"5","catName":"Tea/Coffee","1":"Tea/Coffee","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"14","0":"14","catName":"Tinned chilli/tinned curry","1":"Tinned chilli/tinned curry","quantity":"3","2":"3","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"17","0":"17","catName":"Tinned fruit","1":"Tinned fruit","quantity":"19","2":"19","amount":"4","3":"4","notEnough":"0","4":"0"},{"catID":"7","0":"7","catName":"Tinned meal","1":"Tinned meal","quantity":"0","2":"0","amount":"2","3":"2","notEnough":"1","4":"1"},{"catID":"16","0":"16","catName":"Tinned vegetables","1":"Tinned vegetables","quantity":"10","2":"10","amount":"8","3":"8","notEnough":"0","4":"0"},{"catID":"20","0":"20","catName":"Tuna","1":"Tuna","quantity":"2","2":"2","amount":"4","3":"4","notEnough":"1","4":"1"}]' === '[{"catID":"8","0":"8","catName":"Baked beans","1":"Baked beans","quantity":"16","2":"16","amount":"6","3":"6","notEnough":"0","4":"0"},{"catID":"19","0":"19","catName":"Biscuits","1":"Biscuits","quantity":"3","2":"3","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"1","0":"1","catName":"Cereal","1":"Cereal","quantity":"13","2":"13","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"21","0":"21","catName":"Chocolate","1":"Chocolate","quantity":"8","2":"8","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"18","0":"18","catName":"Hot dessert","1":"Hot dessert","quantity":"28","2":"28","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"4","0":"4","catName":"Jam/Honey","1":"Jam/Honey","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"2","0":"2","catName":"Juice","1":"Juice","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"13","0":"13","catName":"Meatballs/hotdogs","1":"Meatballs/hotdogs","quantity":"4","2":"4","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"3","0":"3","catName":"Milk","1":"Milk","quantity":"9","2":"9","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"9","0":"9","catName":"Pasta 500g","1":"Pasta 500g","quantity":"5","2":"5","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"10","0":"10","catName":"Pasta sauce","1":"Pasta sauce","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"15","0":"15","catName":"Pie/steak/stew","1":"Pie/steak/stew","quantity":"12","2":"12","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"12","0":"12","catName":"Potatoes","1":"Potatoes","quantity":"7","2":"7","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"11","0":"11","catName":"Rice 500g","1":"Rice 500g","quantity":"9","2":"9","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"6","0":"6","catName":"Soup","1":"Soup","quantity":"0","2":"0","amount":"4","3":"4","notEnough":"1","4":"1"},{"catID":"5","0":"5","catName":"Tea/Coffee","1":"Tea/Coffee","quantity":"2","2":"2","amount":"1","3":"1","notEnough":"0","4":"0"},{"catID":"14","0":"14","catName":"Tinned chilli/tinned curry","1":"Tinned chilli/tinned curry","quantity":"3","2":"3","amount":"2","3":"2","notEnough":"0","4":"0"},{"catID":"17","0":"17","catName":"Tinned fruit","1":"Tinned fruit","quantity":"19","2":"19","amount":"4","3":"4","notEnough":"0","4":"0"},{"catID":"7","0":"7","catName":"Tinned meal","1":"Tinned meal","quantity":"0","2":"0","amount":"2","3":"2","notEnough":"1","4":"1"},{"catID":"16","0":"16","catName":"Tinned vegetables","1":"Tinned vegetables","quantity":"10","2":"10","amount":"8","3":"8","notEnough":"0","4":"0"},{"catID":"20","0":"20","catName":"Tuna","1":"Tuna","quantity":"2","2":"2","amount":"4","3":"4","notEnough":"1","4":"1"}]'
+						);
+				});
+				break;
+			default:
+				// code block
+		}
+	}
+	
+});
+</script>
+	</head>
+	<body>
+		<div id="testoutput"></div>
+	</body>
+</html>
