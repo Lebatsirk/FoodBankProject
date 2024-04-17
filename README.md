@@ -3,7 +3,9 @@ Code and images from the Food Bank Project completed by Kristabel Hilton for Com
 
 This repository has been created to provide portfolio access to my previous work, which was not possible until my project had been marked, moderated, and the degree awarded.
 
-Information about this project is as follows (taken and edited from my project report submitted for this module, e.g. citations removed for clarity):
+I had not used PHP, jQuery, or AJAX prior to this project so all code was learnt quickly to meet the aims of the project.  The same applies for SQL stored procedures and transactions, and I appreciate that there is room for improvement in these areas but I also hope it highlights my aptitude for applying new technical skills.
+
+An overview of the aims of this project follows (taken and edited from my project report submitted for this module, e.g. citations removed for clarity):
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
